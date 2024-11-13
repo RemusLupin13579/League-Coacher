@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>League Coacher</title>
+
+    <style>
+        /* עיצוב הדף */
+        body {
+            background-image: url('bg.png'); /* כאן מכניסים את הנתיב לתמונה */
+            background-size: cover; /* מתאים את התמונה לגודל הדף */
+            background-position: center; /* ממרכז את התמונה */
+            background-repeat: no-repeat; /* מונע חזרה על התמונה */
+            margin: 0; /* מסיר שוליים */
+            padding: 0;
+            color: #f5f5f5; /* צבע בהיר לטקסט */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        #reminder {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="reminder"><h2>Welcome! I'm Remus and I will be your coach for today. Good luck! <br>
+			Geronimo!</h2><br>
+	Carry mentality: Focus on yourself and your lane. Everything to pour all gold available right into into your pocket.<br>	
+    			Raptors and scuttle are not off the table
+</div>
+
+<div style="margin-left: 30px;">
+    <audio controls loop>
+        <source src="audio/5m beep.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<script>
+	const reminderText = [
+
+    		`This is where your <strong>CS and XP runs low!</strong> Use the basses to boost your CS<br>
+		Consider objectives too<br>
+		This is also a good time to <strong>Itemize your second item</strong><br>
+		Rabadon if very fed, Liandry's if there are key tanks, or Shadowflame if squishys<br>
+		Also your vision is a tragedy! Buy a ward would you`,
+
+		`This is your prime time! The window to fully dominate your surroundings and maybe spam some emotes`,	
+
+    		`Time to put this lead to use, Split push like a mosquito and suck their blood dry.<br>		
+		not in lead? just make sure there isnt anyone with more items than you on the loose<br>
+		Push carefully, draw their champs to the sidelane and go win mid fights`,
+
+		`This is when you completely stopped CSing and lose your lead! What's wrong with you? Back to farm!<br>	
+		Go on the safe 200G wave instead of the idiotic gamble.`,	
+
+    		`Dont get sloppy and let them damage you. Notice your level XP and take care of vision`	
+	];
+
+        let reminderIndex = 0;
+        const intervalMinutes = 5; // מספר דקות בין כל תזכורת
+        const maxMinutes = 40; // מקסימום זמן להפסקת התזכורות
+
+        function showReminder() {
+        	if (reminderIndex < reminderText.length) {
+        		document.getElementById("reminder").innerHTML = reminderText[reminderIndex];
+        		reminderIndex++;
+    	} else {
+        		document.getElementById("reminder").innerText = `Still in game? Damn. Keep focus and use Split push strategy.
+            								You're on your own now, I believe in you. (Maybe say Perek Tehilim)`;
+    	}
+        }
+
+        // הצגת תזכורת כל דקה למשך 40 דקות
+        const intervalId = setInterval(() => {
+    	if (reminderIndex * intervalMinutes < maxMinutes) {  // בדיקת דקות שעברו-אם עדיין לא הגיע לדקה ארבעים
+        		showReminder();
+    	} else {
+        		clearInterval(intervalId); // עצירת תזכורות לאחר 40 דקות
+   	 }
+        }, intervalMinutes * 60 * 1000); // לולאה כל 5 דקות במילישניות
+
+    </script>
+
+</body>
+</html>
